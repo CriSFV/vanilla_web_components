@@ -1,4 +1,4 @@
-import "./../components/posts.component";
+import "./../components/postsList.component";
 
 export class PostsPage extends HTMLElement {
   connectedCallback() {

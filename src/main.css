@@ -1,0 +1,45 @@
+body {
+  background-color: lightgray;
+}
+
+:root {
+  --color-poc: orange;
+}
+
+app-element::part(hello) {
+  font-size: xx-large;
+}
+
+.header {
+  border-bottom: 1px solid black;
+  padding: 5px;
+  margin: 0 0 10px 0;
+}
+.header span {
+  display: inline-block;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 5px;
+}
+.title_container {
+  border: 1px solid black;
+  margin: 0 0 10px 0;
+}
+.title {
+  border: 1px solid black;
+  padding: 5px;
+  width: fit-content;
+  margin: 5px 0 5px 8%;
+}
+.info_container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.post_list {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 5px;
+  /* height: 90vh;
+  overflow-y: auto; */
+}

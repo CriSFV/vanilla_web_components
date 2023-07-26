@@ -3,13 +3,15 @@ import { LitElement, html } from "lit";
 export class PostUI extends LitElement {
   static get properties() {
     return {
-      post: { type: Object },
+      post: { type: Object, attribute: true },
     };
+  }
+  connectedCallback() {
+    super.connectedCallback();
   }
 
   render() {
-    return html`<p id="title">${this.post?.title}</p>
-      <div id="content">${this.post?.content}</div>`;
+    return html`<p id="${this.post?.id}">${this.post?.title}</p>`;
   }
 
   createRenderRoot() {

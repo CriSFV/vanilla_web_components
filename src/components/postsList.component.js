@@ -1,8 +1,12 @@
 import { LitElement, html } from "lit";
 import { AllPostsUseCase } from "../usecases/all-posts.usecase";
-import "./../ui/post.ui";
+import "../ui/post.ui";
 
 export class PostsComponent extends LitElement {
+  constructor() {
+    super();
+    // this.openPost = this.openPost.bind(this);
+  }
   static get properties() {
     return {
       posts: { type: Array },
@@ -14,12 +18,24 @@ export class PostsComponent extends LitElement {
     this.posts = await AllPostsUseCase.execute();
   }
 
+  openPost(ev) {
+    const post = this.posts.find((post) => post.id === parseInt(ev.target.id));
+    const sendPost = new CustomEvent("poc:open_detail", {
+      bubbles: true,
+      composed: true,
+      detail: post,
+    });
+    this.dispatchEvent(sendPost);
+  }
+
   render() {
     return html`
-      <h1>Posts</h1>
       <ul>
         ${this.posts?.map(
-          (post) => html`<li><post-ui .post="${post}"></post-ui></li>`
+          (post) =>
+            html`<li>
+              <p id="${post?.id}" @click="${this.openPost}">${post?.title}</p>
+            </li>`
         )}
       </ul>
     `;
