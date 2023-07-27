@@ -11,11 +11,31 @@ export class PostDetailComponent extends LitElement {
     };
   }
   static get styles() {
-    return [commonStyles, css``];
+    return [commonStyles];
   }
 
   connectedCallback() {
     super.connectedCallback();
+  }
+  updatePost(e) {
+    e.preventDefault();
+    const title = this.shadowRoot?.querySelector("#title").value;
+    const body = this.shadowRoot?.querySelector("#body").value;
+    const sendPost = new CustomEvent("poc:update_post", {
+      bubbles: true,
+      composed: true,
+      detail: { id: this.post.id, title: title, content: body },
+    });
+    this.dispatchEvent(sendPost);
+  }
+  deletePost(e) {
+    e.preventDefault();
+    const sendPost = new CustomEvent("poc:delete_post", {
+      bubbles: true,
+      composed: true,
+      detail: { id: this.post.id },
+    });
+    this.dispatchEvent(sendPost);
   }
 
   render() {
