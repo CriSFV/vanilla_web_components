@@ -10,7 +10,8 @@ export class HomePostsComponent extends LitElement {
     return css`
       :host {
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 2fr 3fr;
+        gap: 10px;
       }
     `;
   }
@@ -35,7 +36,6 @@ export class HomePostsComponent extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.getPostsData();
-
     document.addEventListener("poc:open_detail", this._showDetail);
     document.addEventListener("poc:open_add_post", this._openAddPost);
     document.addEventListener("poc:add_post", this._addNewPost);
@@ -64,6 +64,8 @@ export class HomePostsComponent extends LitElement {
         : html`<post-detail .post="${this.post}"></post-detail>`}
     `;
   }
+  //   createRenderRoot() {
+  //     return this;
+  //   }
 }
-
 customElements.define("home-posts", HomePostsComponent);

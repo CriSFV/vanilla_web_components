@@ -1,17 +1,34 @@
 import { LitElement, html, css } from "lit";
 import "../ui/post.ui";
+import { commonStyles } from "./commonStyles";
 
 export class PostsComponent extends LitElement {
   constructor() {
     super();
   }
   static get styles() {
-    return css`
-      section {
-        border: 1px solid black;
-      }
-    `;
+    return [
+      commonStyles,
+      css`
+        :host {
+          display: block;
+        }
+        .container {
+          border: 1px solid black;
+        }
+        .button_container {
+          text-align: end;
+        }
+        .postList {
+          padding: 10px;
+        }
+        li {
+          cursor: pointer;
+        }
+      `,
+    ];
   }
+
   static get properties() {
     return {
       posts: { type: Array },
@@ -20,10 +37,10 @@ export class PostsComponent extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.attachShadow({ mode: "open" });
   }
 
   openPost(ev) {
-    console.log(ev.target);
     const post = this.posts.find((post) => post.id === parseInt(ev.target.id));
     const sendPost = new CustomEvent("poc:open_detail", {
       bubbles: true,
@@ -44,23 +61,25 @@ export class PostsComponent extends LitElement {
 
   render() {
     return html`
-      <section>
-        <button @click=${this.openAddPost}>Add</button>
-        <h2>Posts List</h2>
-        <ol>
-          ${this.posts?.map(
-            (post) =>
-              html`<li>
-                <p .id="${post?.id}" @click=${this.openPost}>${post?.title}</p>
-              </li>`
-          )}
-        </ol>
+      <section class="container">
+        <section class="button_container">
+          <button @click=${this.openAddPost}>Add</button>
+        </section>
+        <section class="postList">
+          <h2>Posts List</h2>
+          <ol>
+            ${this.posts?.map(
+              (post) =>
+                html`<li>
+                  <p .id="${post?.id}" @click=${this.openPost}>
+                    ${post?.title}
+                  </p>
+                </li>`
+            )}
+          </ol>
+        </section>
       </section>
     `;
-  }
-
-  createRenderRoot() {
-    return this;
   }
 }
 

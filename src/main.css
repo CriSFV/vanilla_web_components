@@ -32,14 +32,3 @@ app-element::part(hello) {
   width: fit-content;
   margin: 5px 0 5px 8%;
 }
-.info_container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-.post_list {
-  border: 1px solid black;
-  margin: 10px;
-  padding: 5px;
-  /* height: 90vh;
-  overflow-y: auto; */
-}
