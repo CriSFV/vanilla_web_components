@@ -37,7 +37,6 @@ export class PostsComponent extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.attachShadow({ mode: "open" });
   }
 
   openPost(ev) {
