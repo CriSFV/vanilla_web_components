@@ -1,11 +1,16 @@
-import { LitElement, html } from "lit";
-import { AllPostsUseCase } from "../usecases/all-posts.usecase";
+import { LitElement, html, css } from "lit";
 import "../ui/post.ui";
 
 export class PostsComponent extends LitElement {
   constructor() {
     super();
-    // this.openPost = this.openPost.bind(this);
+  }
+  static get styles() {
+    return css`
+      section {
+        border: 1px solid black;
+      }
+    `;
   }
   static get properties() {
     return {
@@ -13,9 +18,9 @@ export class PostsComponent extends LitElement {
     };
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
-    this.posts = await AllPostsUseCase.execute();
+    console.log(this.posts);
   }
 
   openPost(ev) {
@@ -30,14 +35,18 @@ export class PostsComponent extends LitElement {
 
   render() {
     return html`
-      <ul>
-        ${this.posts?.map(
-          (post) =>
-            html`<li>
-              <p id="${post?.id}" @click="${this.openPost}">${post?.title}</p>
-            </li>`
-        )}
-      </ul>
+      <section>
+        <button @click>Add</button>
+        <h2>Posts List</h2>
+        <ul>
+          ${this.posts?.map(
+            (post) =>
+              html`<li>
+                <p .id="${post?.id}" @click=${this.openPost}>${post?.title}</p>
+              </li>`
+          )}
+        </ul>
+      </section>
     `;
   }
 
