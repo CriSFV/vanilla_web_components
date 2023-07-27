@@ -2,12 +2,15 @@ import { LitElement, html, css } from "lit";
 import { commonStyles } from "./commonStyles";
 
 export class AddPostComponent extends LitElement {
+  constructor() {
+    super();
+  }
   static get styles() {
-    return [commonStyles, css``];
+    return [commonStyles];
   }
   static get properties() {
     return {
-      title: { type: Object },
+      title: { type: String },
       body: { type: String },
     };
   }
@@ -19,20 +22,25 @@ export class AddPostComponent extends LitElement {
 
   addPost(e) {
     e.preventDefault();
-    this.title = this.renderRoot?.querySelector("#title").value;
-    this.body = this.renderRoot?.querySelector("#body").value;
+    const title = this.shadowRoot?.querySelector("#title").value;
+    const body = this.shadowRoot?.querySelector("#body").value;
     const sendPost = new CustomEvent("poc:add_post", {
       bubbles: true,
       composed: true,
-      detail: { title: this.title, content: this.body },
+      detail: { title: title, content: body },
     });
     this.dispatchEvent(sendPost);
+    this.title = "";
+    this.body = "";
   }
   cancelPost(e) {
     e.preventDefault();
-    this.title = "";
-    this.body = "";
-    console.log("cancel");
+    const cancelPost = new CustomEvent("poc:open_add_post", {
+      bubbles: true,
+      composed: true,
+      detail: { cancel: true },
+    });
+    this.dispatchEvent(cancelPost);
   }
 
   render() {
