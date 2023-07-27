@@ -1,6 +1,14 @@
-import { LitElement, html } from "lit";
+import { LitElement, css, html } from "lit";
 
 export class PostUI extends LitElement {
+  // static get styles() {
+  //   return css`
+  //     :host {
+  //       border: 1px solid black;
+  //     }
+  //   `;
+  // }
+
   static get properties() {
     return {
       post: { type: Object, attribute: true },
@@ -11,7 +19,12 @@ export class PostUI extends LitElement {
   }
 
   render() {
-    return html`<p id="${this.post?.id}">${this.post?.title}</p>`;
+    return html`
+      <span>Title</span>
+      <p id="title">${this.post?.title}</p>
+      <span>Body</span>
+      <p id="description">${this.post?.content}</p>
+    `;
   }
 
   createRenderRoot() {

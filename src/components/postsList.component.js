@@ -20,10 +20,10 @@ export class PostsComponent extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    console.log(this.posts);
   }
 
   openPost(ev) {
+    console.log(ev.target);
     const post = this.posts.find((post) => post.id === parseInt(ev.target.id));
     const sendPost = new CustomEvent("poc:open_detail", {
       bubbles: true,
@@ -33,19 +33,28 @@ export class PostsComponent extends LitElement {
     this.dispatchEvent(sendPost);
   }
 
+  openAddPost() {
+    const sendPost = new CustomEvent("poc:open_add_post", {
+      bubbles: true,
+      composed: true,
+      detail: { open_add: true },
+    });
+    this.dispatchEvent(sendPost);
+  }
+
   render() {
     return html`
       <section>
-        <button @click>Add</button>
+        <button @click=${this.openAddPost}>Add</button>
         <h2>Posts List</h2>
-        <ul>
+        <ol>
           ${this.posts?.map(
             (post) =>
               html`<li>
                 <p .id="${post?.id}" @click=${this.openPost}>${post?.title}</p>
               </li>`
           )}
-        </ul>
+        </ol>
       </section>
     `;
   }
