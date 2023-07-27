@@ -1,6 +1,7 @@
+import "../components/post.component";
 export class HomePage extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = `This is the home`;
+    this.innerHTML = `<home-posts></home-posts>`;
   }
 }
 
