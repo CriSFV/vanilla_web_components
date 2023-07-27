@@ -64,8 +64,5 @@ export class HomePostsComponent extends LitElement {
         : html`<post-detail .post="${this.post}"></post-detail>`}
     `;
   }
-  //   createRenderRoot() {
-  //     return this;
-  //   }
 }
 customElements.define("home-posts", HomePostsComponent);

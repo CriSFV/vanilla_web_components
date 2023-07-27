@@ -3,27 +3,7 @@ import { commonStyles } from "./commonStyles";
 
 export class AddPostComponent extends LitElement {
   static get styles() {
-    return [
-      commonStyles,
-      css`
-        .container {
-          min-height: 200px;
-          border: 1px solid black;
-          padding: 10px;
-        }
-        .container form {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          gap: 10px;
-          align-items: center;
-        }
-        label {
-          display: grid;
-          grid-template-columns: 1fr 4fr;
-        }
-      `,
-    ];
+    return [commonStyles, css``];
   }
   static get properties() {
     return {
@@ -66,7 +46,12 @@ export class AddPostComponent extends LitElement {
           /></label>
           <label for="body"
             >Body
-            <textarea id="body" name="body" .value="${this.body}"></textarea>
+            <textarea
+              id="body"
+              name="body"
+              rows="5"
+              .value="${this.body}"
+            ></textarea>
           </label>
           <div class="buttons_container">
             <button @click=${this.addPost}>Add</button>
