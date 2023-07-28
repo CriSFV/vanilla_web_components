@@ -4,6 +4,7 @@ import { commonStyles } from "./commonStyles";
 export class PostDetailComponent extends LitElement {
   constructor() {
     super();
+    this.post = {};
   }
   static get properties() {
     return {
@@ -36,6 +37,15 @@ export class PostDetailComponent extends LitElement {
       detail: { id: this.post.id },
     });
     this.dispatchEvent(sendPost);
+  }
+  cancelPost(e) {
+    e.preventDefault();
+    const cancelPost = new CustomEvent("poc:open_add_post", {
+      bubbles: true,
+      composed: true,
+      detail: { cancel: true },
+    });
+    this.dispatchEvent(cancelPost);
   }
 
   render() {
