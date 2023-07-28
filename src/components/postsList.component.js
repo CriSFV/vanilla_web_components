@@ -14,7 +14,7 @@ export class PostsComponent extends LitElement {
           display: block;
         }
         .container {
-          border: 1px solid black;
+          padding: 0px;
         }
         .button_container {
           text-align: end;
@@ -35,9 +35,9 @@ export class PostsComponent extends LitElement {
     };
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
+  // connectedCallback() {
+  //   super.connectedCallback();
+  // }
 
   openPost(ev) {
     const post = this.posts.find((post) => post.id === parseInt(ev.target.id));

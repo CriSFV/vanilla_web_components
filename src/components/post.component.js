@@ -30,7 +30,6 @@ export class HomePostsComponent extends LitElement {
     this._addNewPost = this._addNewPost.bind(this);
     this._updatePost = this._updatePost.bind(this);
     this._deletePost = this._deletePost.bind(this);
-    // this._cancelPost = this._cancelPost.bind(this);
   }
   async getPostsData() {
     this.posts = await AllPostsUseCase.execute();
@@ -44,7 +43,6 @@ export class HomePostsComponent extends LitElement {
     document.addEventListener("poc:open_detail", this._showDetail);
     document.addEventListener("poc:open_add_post", this._openAddPost);
     document.addEventListener("poc:add_post", this._addNewPost);
-    // document.addEventListener("poc:cancel_post", this._openAddPost);
     document.addEventListener("poc:update_post", this._updatePost);
     document.addEventListener("poc:delete_post", this._deletePost);
   }
@@ -53,7 +51,6 @@ export class HomePostsComponent extends LitElement {
     document.removeEventListener("poc:open_detail", this._showDetail);
     document.removeEventListener("poc:open_add_post", this._openAddPost);
     document.removeEventListener("poc:add_post", this._addNewPost);
-    // document.removeEventListener("poc:cancel_post", this._openAddPost);
     document.removeEventListener("poc:update_post", this._updatePost);
     document.removeEventListener("poc:delete_post", this._deletePost);
   }
@@ -61,7 +58,6 @@ export class HomePostsComponent extends LitElement {
     this.post = ev.detail;
   }
   _openAddPost() {
-    console.log("entro open add post");
     this.post = null;
   }
 
@@ -78,10 +74,6 @@ export class HomePostsComponent extends LitElement {
     this.posts = await DeletePostUseCase.execute(this.posts, ev.detail.id);
     this.post = null;
   }
-  // _cancelPost() {
-  //   console.log("entro cancel post desde home");
-  //   this.post = null;
-  // }
 
   render() {
     return html`
