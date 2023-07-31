@@ -26,9 +26,9 @@ export class AddPostComponent extends LitElement {
       composed: true,
       detail: { title: title, content: body },
     });
+    this.dispatchEvent(sendPost);
     this.titlePost = "";
     this.bodyPost = "";
-    this.dispatchEvent(sendPost);
   }
 
   cancelPost(e) {
