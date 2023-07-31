@@ -1,23 +1,20 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
 import { commonStyles } from "./commonStyles";
 
 export class AddPostComponent extends LitElement {
   constructor() {
     super();
+    this.titlePost = "";
+    this.bodyPost = "";
   }
   static get styles() {
     return [commonStyles];
   }
   static get properties() {
     return {
-      title: { type: String },
-      body: { type: String },
+      titlePost: { type: String },
+      bodyPost: { type: String },
     };
-  }
-  connectedCallback() {
-    super.connectedCallback();
-    this.title = "";
-    this.body = "";
   }
 
   addPost(e) {
@@ -29,18 +26,15 @@ export class AddPostComponent extends LitElement {
       composed: true,
       detail: { title: title, content: body },
     });
+    this.titlePost = "";
+    this.bodyPost = "";
     this.dispatchEvent(sendPost);
-    this.title = "";
-    this.body = "";
   }
+
   cancelPost(e) {
     e.preventDefault();
-    const cancelPost = new CustomEvent("poc:open_add_post", {
-      bubbles: true,
-      composed: true,
-      detail: { cancel: true },
-    });
-    this.dispatchEvent(cancelPost);
+    this.titlePost = "";
+    this.bodyPost = "";
   }
 
   render() {
@@ -50,7 +44,12 @@ export class AddPostComponent extends LitElement {
         <form>
           <label for="title"
             >Title
-            <input type="text" id="title" name="title" .value="${this.title}"
+            <input
+              type="text"
+              id="title"
+              name="title"
+              .value="${this.titlePost}"
+              @input=${(e) => (this.titlePost = e.target.value)}
           /></label>
           <label for="body"
             >Body
@@ -58,7 +57,8 @@ export class AddPostComponent extends LitElement {
               id="body"
               name="body"
               rows="5"
-              .value="${this.body}"
+              .value="${this.bodyPost}"
+              @input=${(e) => (this.bodyPost = e.target.value)}
             ></textarea>
           </label>
           <div class="buttons_container">
